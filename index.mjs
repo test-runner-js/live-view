@@ -92,6 +92,8 @@ class TreeView {
   printTree () {
     const ansi = require('ansi-escape-sequences')
     const groups = Array.from(this.runner.tom).filter(t => t.state === 'ignored')
+    /* tmp fix while root node remains in 'pending' state (should be ignored) */
+    groups.unshift(this.runner.tom)
     const lines = []
     for (const group of groups) {
       const line = [ansi.erase.inLine(2)]
