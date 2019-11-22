@@ -7,7 +7,7 @@
   /**
    * Custom view API.
    */
-  class TreeView {
+  class LiveView {
     constructor (options) {
       this.options = options;
       this.fails = [];
@@ -129,6 +129,6 @@
     static optionDefinitions () {}
   }
 
-  return TreeView;
+  return LiveView;
 
 })));

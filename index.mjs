@@ -1,7 +1,7 @@
 /**
  * Custom view API.
  */
-class TreeView {
+class LiveView {
   constructor (options) {
     this.options = options
     this.fails = []
@@ -123,4 +123,4 @@ class TreeView {
   static optionDefinitions () {}
 }
 
-export default TreeView
+export default LiveView
