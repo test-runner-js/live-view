@@ -1,7 +1,7 @@
 {
   "name": "@test-runner/live-view",
   "author": "Lloyd Brookes <75pound@gmail.com>",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "@test-runner/live-view",
   "repository": "https://github.com/test-runner-js/live-view",
   "main": "dist/index.js",
