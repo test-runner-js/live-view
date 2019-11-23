@@ -108,6 +108,8 @@ class LiveView {
           line.push('[cyan]{•}')
         } else if (test.state === 'skipped') {
           line.push('[grey]{-}')
+        } else if (test.state === 'pending') {
+          line.push('[white]{•}')
         }
       }
       lines.push(line.join(''))
