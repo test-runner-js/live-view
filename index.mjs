@@ -75,12 +75,10 @@ class LiveView {
     const fails = []
     for (const test of this.fails) {
       const err = test.result
-      const indent = ' '.repeat(test.level())
       const parent = test.parent ? test.parent.name : ''
-      fails.push(`${indent}[red]{⨯} [magenta]{${parent}} ${test.name}`)
+      fails.push(`[red]{⨯} [magenta]{${parent}} ${test.name}`)
       const lines = err.stack.split('\n').map(line => {
-        const indent = ' '.repeat(test.level() + 2)
-        return indent + line
+        return '  ' + line
       })
       fails.push(`\n${lines.join('\n').trimEnd()}\n`)
     }
