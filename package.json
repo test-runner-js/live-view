@@ -22,7 +22,7 @@
     "index.mjs"
   ],
   "devDependencies": {
-    "rollup": "^1.27.4"
+    "rollup": "^1.27.5"
   },
   "dependencies": {
     "ansi-escape-sequences": "^5.1.2"
