@@ -26,6 +26,8 @@
      * @param {number}
      */
     start (count) {
+      this.log();
+      this.printTree();
     }
 
     /**
@@ -71,12 +73,16 @@
      * @params {object} stats.start
      * @params {object} stats.end
      */
-    end (stats) {
+    _end (stats) {
+      stats = this.runner.stats;
       this.prevLineCount = 0;
+
       const failColour = stats.fail > 0 ? 'red' : 'white';
       const passColour = stats.pass > 0 ? 'green' : 'white';
       const skipColour = stats.skip > 0 ? 'grey' : 'white';
-      this.log(`\n[white]{Completed in ${stats.timeElapsed()}ms. Pass: [${passColour}]{${stats.pass}}, fail: [${failColour}]{${stats.fail}}, skip: [${skipColour}]{${stats.skip}}.}\n`);
+      const inProgressColour = stats.inProgress > 0 ? 'rgb(255,191,0)' : 'white';
+      const statsSummary = `\nIn-progress: [${inProgressColour}]{${stats.inProgress}}, pass: [${passColour}]{${stats.pass}}, fail: [${failColour}]{${stats.fail}}, skip: [${skipColour}]{${stats.skip}}, todo: [${skipColour}]{${stats.todo}}.\n`;
+      this.log(statsSummary);
 
       const fails = [];
       for (const test of this.fails) {
@@ -95,29 +101,36 @@
 
     printTree () {
       const ansi = require('ansi-escape-sequences');
-      const groups = Array.from(this.runner.tom).filter(t => t.state === 'ignored');
+      const groups = Array.from(this.runner.tom).filter(t => t.type === 'group');
       const lines = [];
       for (const group of groups) {
         const line = [ansi.erase.inLine(2)];
         const indent = ' '.repeat(group.level());
         line.push(`${indent}- [magenta]{${group.name}} `);
         for (const test of group.children) {
-          if (test.state === 'pass') {
-            line.push('[green]{✓}');
-          } else if (test.state === 'fail') {
-            line.push('[red]{⨯}');
-          } else if (test.state === 'in-progress') {
-            line.push('[cyan]{•}');
-          } else if (test.state === 'skipped') {
-            line.push('[grey]{•}');
-          } else if (test.state === 'pending') {
-            line.push('[white]{•}');
+          if (test.type !== 'group') {
+            if (test.state === 'pass') {
+              line.push('[green]{✓}');
+            } else if (test.state === 'fail') {
+              line.push('[red]{⨯}');
+            } else if (test.state === 'in-progress') {
+              line.push('[rgb(255,191,0)]{•}');
+            } else if (test.state === 'skipped') {
+              line.push('[grey]{-}');
+            } else if (test.state === 'pending') {
+              line.push(`[white]{•}`);
+            } else if (test.state === 'ignored') {
+              line.push(`[yellow]{•}`);
+            } else if (test.state === 'todo') {
+              line.push(`[cyan]{•}`);
+            }
           }
         }
         lines.push(line.join(''));
       }
       this.log(lines.join('\n'));
-      this.prevLineCount = lines.length;
+      this._end();
+      this.prevLineCount = lines.length + 3;
     }
 
     /**

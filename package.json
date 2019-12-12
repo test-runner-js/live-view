@@ -15,14 +15,15 @@
   },
   "scripts": {
     "test": "npm run dist && test-runner test.js",
-    "dist": "rollup -f umd -n TreeView -o dist/index.js index.mjs"
+    "dist": "rollup -f umd -n TreeView -o dist/index.js index.mjs",
+    "watch": "rollup -f umd -n TreeView -o dist/index.js index.mjs -w"
   },
   "files": [
     "dist/index.js",
     "index.mjs"
   ],
   "devDependencies": {
-    "rollup": "^1.27.5"
+    "rollup": "^1.27.11"
   },
   "dependencies": {
     "ansi-escape-sequences": "^5.1.2"
