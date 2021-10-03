@@ -69,7 +69,7 @@ class LiveView {
    * @params {object} stats.end
    */
   _end () {
-    stats = this.runner.stats
+    const stats = this.runner.stats
     this.prevLineCount = 0
 
     const failColour = stats.fail > 0 ? 'red' : 'white'
