@@ -4,28 +4,23 @@
   "version": "0.1.7",
   "description": "@test-runner/live-view",
   "repository": "https://github.com/test-runner-js/live-view",
-  "main": "dist/index.js",
-  "module": "index.mjs",
+  "type": "module",
+  "exports": "./index.js",
   "keywords": [
-    "test-runner-view"
+    "test-runner"
   ],
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=12.17"
   },
   "scripts": {
-    "test": "npm run dist && test-runner test.js",
-    "dist": "rollup -f umd -n TreeView -o dist/index.js index.mjs",
-    "watch": "rollup -f umd -n TreeView -o dist/index.js index.mjs -w"
+    "test": "node test.js"
   },
   "files": [
-    "dist/index.js",
-    "index.mjs"
+    "dist",
+    "index.js"
   ],
-  "devDependencies": {
-    "rollup": "^1.27.11"
-  },
   "dependencies": {
-    "ansi-escape-sequences": "^5.1.2"
+    "ansi-escape-sequences": "^6.2.0"
   }
 }

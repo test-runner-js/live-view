@@ -1,3 +1,5 @@
+import ansi from 'ansi-escape-sequences'
+
 /**
  * Custom view API.
  */
@@ -8,7 +10,6 @@ class LiveView {
   }
 
   log (...args) {
-    const ansi = require('ansi-escape-sequences')
     if (this.prevLineCount) {
       process.stdout.write(ansi.cursor.previousLine(this.prevLineCount))
     }
@@ -67,7 +68,7 @@ class LiveView {
    * @params {object} stats.start
    * @params {object} stats.end
    */
-  _end (stats) {
+  _end () {
     stats = this.runner.stats
     this.prevLineCount = 0
 
@@ -94,7 +95,6 @@ class LiveView {
   }
 
   printTree () {
-    const ansi = require('ansi-escape-sequences')
     const groups = Array.from(this.runner.tom).filter(t => t.type === 'group')
     const lines = []
     for (const group of groups) {
